@@ -108,4 +108,6 @@ require "rack"
 require "servolux"
 require "net/https"
 require "uri"
-Rack::StreamingProxy.require_all_libs_relative_to(__FILE__)
+require "rack/streaming_proxy/railtie" if defined? ::Rails::Railtie
+require "rack/streaming_proxy/proxy_request"
+
