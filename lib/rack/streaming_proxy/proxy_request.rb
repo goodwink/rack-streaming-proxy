@@ -29,14 +29,14 @@ class Rack::StreamingProxy
 
 	  	@logger.debug "[Rack::StreamingProxy] Proxy Request Headers:"
 	  	proxy_request.each_header {|h,v| @logger.debug "[Rack::StreamingProxy] #{h} = #{v}"}
-      @piper = Servolux::Piper.new 'r', :timeout => 30
+      @piper = Rack::Piper.new 'r', :timeout => 30
 
       @piper.child do
         http_req = Net::HTTP.new(uri.host, uri.port)
         http_req.use_ssl = uri.is_a?(URI::HTTPS)
         http_req.start do |http|
 	  			@logger.debug "[Rack::StreamingProxy] Starting request to #{http.inspect}"
-	  			
+
           http.request(proxy_request) do |response|
 	  				@logger.debug "[Rack::StreamingProxy] got response: #{response.inspect}"
             # at this point the headers and status are available, but the body
@@ -58,6 +58,8 @@ class Rack::StreamingProxy
         # wait for the status and headers to come back from the child
         @status = read_from_child
         @headers = HeaderHash.new(read_from_child)
+
+        @logger.debug "[Rack::StreamingProxy] Headers received by parent"
       end
     rescue => e
       if @piper
@@ -67,13 +69,17 @@ class Rack::StreamingProxy
         raise
       end
     ensure
-      # child needs to exit, always.
-      @piper.child { exit!(0) } if @piper
+      if RUBY_PLATFORM != 'java'
+        # child needs to exit, always.
+        @piper.child { exit!(0) } if @piper
+      end
     end
 
     def each
       chunked = @headers["Transfer-Encoding"] == "chunked"
       term = "\r\n"
+
+      @logger.debug "[Rack::StreamingProxy] Reading response body"
 
       while chunk = read_from_child
         break if chunk == :done

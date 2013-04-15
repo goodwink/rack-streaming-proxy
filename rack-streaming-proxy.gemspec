@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "rack-streaming-proxy"
-  s.version = "1.0.4"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Witmer"]
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = "Streaming proxy for Rack, the rainbows to Rack::Proxy's unicorn."
   s.email = "nwitmer@gmail.com"
   s.extra_rdoc_files = ["History.txt", "README.txt"]
-  s.files = [".gitignore", ".rspec", ".rvmrc", "Gemfile", "History.txt", "README.txt", "Rakefile", "dev/proxy.ru", "dev/streamer.ru", "lib/rack/streaming_proxy.rb", "lib/rack/streaming_proxy/proxy_request.rb", "lib/rack/streaming_proxy/railtie.rb", "rack-streaming-proxy.gemspec", "spec/app.ru", "spec/proxy.ru", "spec/spec_helper.rb", "spec/streaming_proxy_spec.rb"]
+  s.files = [".gitignore", ".rspec", ".rvmrc", "Gemfile", "History.txt", "README.txt", "Rakefile", "dev/proxy.ru", "dev/streamer.ru", "lib/rack/streaming_proxy.rb", "lib/rack/streaming_proxy/proxy_request.rb", "lib/rack/streaming_proxy/railtie.rb", "lib/rack/streaming_proxy/piper.rb", "rack-streaming-proxy.gemspec", "spec/app.ru", "spec/proxy.ru", "spec/spec_helper.rb", "spec/streaming_proxy_spec.rb"]
   s.homepage = "http://github.com/fredngo/rack-streaming-proxy"
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]

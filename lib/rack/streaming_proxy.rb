@@ -4,7 +4,7 @@ module Rack
     class Error < StandardError; end
 
     # :stopdoc:
-    VERSION = '1.0.4'
+    VERSION = '1.1.0'
     LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
     PATH = ::File.expand_path(::File.join(::File.dirname(__FILE__), "..", "..")) + ::File::SEPARATOR
     # :startdoc:
@@ -110,4 +110,4 @@ require "net/https"
 require "uri"
 require "rack/streaming_proxy/railtie" if defined? ::Rails::Railtie
 require "rack/streaming_proxy/proxy_request"
-
+require "rack/streaming_proxy/piper"
