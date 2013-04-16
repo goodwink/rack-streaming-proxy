@@ -8,6 +8,8 @@ class Rack::StreamingProxy
 
     def initialize(request, uri, logger)
 	  	@logger = logger ? logger : Logger.new(STDOUT)
+      log.level = Logger::WARN
+
       uri = URI.parse(uri)
 
       @logger.info "Proxying to: #{uri.to_s}"
