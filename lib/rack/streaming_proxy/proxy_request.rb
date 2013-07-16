@@ -31,7 +31,7 @@ class Rack::StreamingProxy
 
 	  	@logger.debug "[Rack::StreamingProxy] Proxy Request Headers:"
 	  	proxy_request.each_header {|h,v| @logger.debug "[Rack::StreamingProxy] #{h} = #{v}"}
-      @piper = Rack::Piper.new 'r', :timeout => 30
+      @piper = Rack::Piper.new 'r', :timeout => 180
 
       @piper.child do
         http_req = Net::HTTP.new(uri.host, uri.port)
